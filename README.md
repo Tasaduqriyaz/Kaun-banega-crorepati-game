@@ -12,13 +12,14 @@ questions = [
     ['Which of these is not a programming language ?','A  C', 'B PYTHON', 'C JAVA','D TALLY','E NONE',4],
     ['Who is current president of united states?','A BARACK OBAMA', 'B JOE BIDEN', 'C HILARY CLINTON','D GOORGE BUSH','E NONE',2],
     ['Who is the richest man ?','A STEVE JOBS', 'B MARK ZUCKERBERG', 'C ELON MUSK','D BILL GATES','E NONE',3],
-    ['Who is the CEO of boat ?','ANUPAM MITTAL', 'B AMAN GUPTA', 'C PIYUSH BANSAL','D AZHAR','E NONE',2],
+    ['Who is the CEO of boat ?','A ANUPAM MITTAL', 'B AMAN GUPTA', 'C PIYUSH BANSAL','D AZHAR','E NONE',2],
     ['Who is the richest actor ?','A SRK', 'B SALMAN', 'C AAMIR','D AKHSAY','E NONE',1],
     ['Who is the richest cricketer ?','A SACHIN', 'B KOHLI', 'C DHONI','D RAINA','E NONE',3],
     ['Who is the fastest athelete ?','A CR7', 'B USAIN BOLT', 'C MESSI','D POLLARD','E NONE',2]
 ]
 Levels = [1000,2000,3000,5000,10000,20000,40000,80000,160000,320000,640000,1250000,2500000,5000000,10000000]
 i= 0
+flip_count =0
 money =0
 run_once = 0
 for i in range(0,len(questions)):
@@ -29,7 +30,7 @@ for i in range(0,len(questions)):
     print (f'{question[1]}                  {question[2]}')
     print (f'{question[3]}              {question[4]}')
     print (f'{question[5]}')
-    reply = int(input('enter the value between 1-4 ,0 for quitting, 6 FOR 50-50'))
+    reply = int(input('enter the value between 1-4 ,0 for quitting, 6 FOR 50-50, 7 for flip    '))
     print ('\n')
     if reply==0:
       money=Levels[i-1]
@@ -39,9 +40,43 @@ for i in range(0,len(questions)):
            answer =question[question[-1]] 
            answer2= question[question[-1] -6]
            print(f'{answer}                          {answer2}')                       
-           reply = int(input('enter the value between 1-4 ,0 for quitting')) 
-           run_once =1  
-    if reply == question[-1]:
+           reply = int(input('enter the value between 1-4 ,0 for quitting,7 for flipping      ')) 
+           run_once =1
+           if flip_count ==0:
+              if reply==7:
+                flip = ['which is our national animal ?','A LION', 'B TIGER', 'C CAT', 'D DOG', 'E NONE',2]
+                print (flip[0])
+                print (f'{flip[1]}                  {flip[2]}')
+                print (f'{flip[3]}                 {flip[4]}')
+                print (f'{flip[5]}')
+                reply = int(input('enter the value between 1-4 ,0 for quitting,6 FOR 50-50'        ))
+                if reply == flip[-1]:
+                  print (f'correct answer  You have won Rs.{Levels[i]}')
+                  flip_count =1
+                else:
+                  print ('wrong answer you have lost the game') 
+                  break 
+    if flip_count ==0:
+        if reply==7:
+          flip = ['which is our national animal ?','A LION', 'B TIGER', 'C CAT', 'D DOG', 'E NONE',2]
+          print (flip[0])
+          print (f'{flip[1]}                  {flip[2]}')
+          print (f'{flip[3]}                 {flip[4]}')
+          print (f'{flip[5]}')
+          reply = int(input('enter the value between 1-4 ,0 for quitting,6 FOR 50-50'        ))
+          if reply ==6:
+            answer3 =flip[flip[-1]] 
+            answer4= flip[flip[-1] -6]
+            print(f'{answer3}                          {answer4}')                       
+            reply = int(input('enter the value between 1-4 ,0 for quitting'))
+            if reply == flip[-1]:
+              print (f'correct answer  You have won Rs.{Levels[i]}')
+              flip_count =1
+            else:
+              print ('wrong answer you have lost the game') 
+              break  
+    if flip_count != 1:             
+      if reply == question[-1]:
         print (f'correct answer! You have won Rs.{Levels[i]}')
         if i==4:
             money = 10000
@@ -50,7 +85,7 @@ for i in range(0,len(questions)):
         if i==14:
           money = 10000000
           print('You are a crorepati')
-    else:
-     print ('wrong answer! you have lost the game')
-     break
+      else:
+       print ('wrong! you have lost the game')
+       break
 print (f'The total amount of money won is Rs.{money}')
