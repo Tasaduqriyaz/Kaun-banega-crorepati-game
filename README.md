@@ -31,6 +31,8 @@ for i in range(0,len(questions)):
     print (f'{question[3]}              {question[4]}')
     print (f'{question[5]}')
     reply = int(input('enter the value between 1-4 ,0 for quitting, 6 FOR 50-50, 7 for flip    '))
+    if reply < 0 and reply > 7:
+      raise ValueError("wrong value")
     print ('\n')
     if reply==0:
       money=Levels[i-1] if i>0 else 0
